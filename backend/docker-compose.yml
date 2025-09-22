@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: civic_pulse
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  backend:
+    build: ./backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/civic_pulse?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      jwt.secret: CHANGE_THIS_SECRET_32CHARS
+      SPRING_MAIL_USERNAME: civicissuegov@gmail.com
+      SPRING_MAIL_PASSWORD: mydf pffs ffxy gfrm
+      gdrive.service.account.path: /secrets/civic-pulse.json
+      gdrive.parent.folder.id: 1Kn1aH2UEUPfwSXmgj13X4TpMcjYONqVF
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend:/app
+      - ./secrets:/secrets:ro
+    depends_on:
+      - db
+
+volumes:
+  db_data:

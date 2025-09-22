@@ -1,0 +1,3 @@
+com\civicpulse\service\AuthServiceTest.class
+com\civicpulse\security\JwtProviderTest.class
+com\civicpulse\service\ReportServiceTest.class
