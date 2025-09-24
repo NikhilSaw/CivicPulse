@@ -18,6 +18,8 @@ CREATE TABLE reports (
   longitude DOUBLE,
   priority VARCHAR(20) DEFAULT 'LOW',
   status VARCHAR(30) DEFAULT 'NEW',
+  assigned_department VARCHAR(255),
+  assigned_to BIGINT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(id)
@@ -51,6 +53,3 @@ CREATE TABLE report_status_history (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_report FOREIGN KEY (report_id) REFERENCES reports(id)
 );
-
--- Insert seeded admin (password = "admin", bcrypt hash below is example)
-INSERT INTO users (name, email, password, role) VALUES ('Admin','admin@gmail.com','$2a$10$3rZUSF2Z3IlhX7CzQqlJK.OCyBlJfU1oFMw9U/W2FeVBG5iSvH4G2','ROLE_ADMIN');

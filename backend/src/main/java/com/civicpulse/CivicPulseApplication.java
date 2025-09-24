@@ -22,13 +22,11 @@ public class CivicPulseApplication {
                 User admin = new User();
                 admin.setName("Admin");
                 admin.setEmail("admin@gmail.com");
-                admin.setPassword(encoder.encode("admin")); // Use a strong password in production!
+                admin.setPassword(encoder.encode("admin")); // change to secure password
                 admin.setRole("ROLE_ADMIN");
-                admin.setIsActive(true);
                 userRepository.save(admin);
                 System.out.println("Seeded admin user: admin@gmail.com / admin");
             }
         };
     }
-
 }
